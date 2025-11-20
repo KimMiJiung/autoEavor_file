@@ -1,0 +1,141 @@
+프로젝트명: AutoEavor		
+
+--------------------------------------------------------------------
+CRM
+
+-- 엔티티내용
+------------------------------------------------------------------------------------------------------
+멤버정보:Member 
+		id
+		memberId
+		password
+		password2	
+		name	
+		phone	
+		email	
+		gender
+		age	
+		birthday
+		regDate		
+		role		
+		address
+
+--추천AI 폼에서 쓸 추가 데이터 조사필요
+멤버상세정보: MemberDetail
+		budgetRange;                  // 구매예산
+		primaryUsage;                  // 주 이용 목적
+		familySize;                       // 가족 구성원 수
+		commuteDistance;            // 하루 평균 운행 거리
+		preferredVehicleType;       // 선호 차종   (아반떼, 캐스퍼, 캐스퍼 일렉트릭, 그랜저 투싼, 기타)
+		preferredEngineType;        // 선호 연료  
+		importanceFactors;           // 중시 기준 리스트 (JSON 가능)
+		avoidFactors;                   // 피하고 싶은 요소
+		memberType                   // 신규/기존
+		
+		월주행거리(km)
+		주요 운전 용도
+		
+		선호색상
+		
+		동승인원
+		
+	
+
+차상품: Car
+		id
+		carId
+		name
+		price
+		company
+		plant	
+		category
+		fuelType		
+		fileName  // 차량이미지의 파일명		      
+		carImage //업로드된 차량이미지
+		
+차상품상세: CarDetail
+	    id
+		car         car정보
+		
+
+
+
+주소: Address
+	 id;	
+	 country;	
+	 zipcode;
+	 basicAddress;
+	 detailAddress;
+
+
+상담: Counsel
+	  id
+      member                      // 상담 대상 멤버	  
+	  carType                     // 상담차종
+	  content                     // 상담내용
+	  counselDate                 // 희망상담날짜
+	  counselDateTime             // 희망상담시간
+	  additionalRequest           // 추가전달사항
+	  answerContent               // 답변내용 
+	  enum AnswerStatus           // 상담대기(상담신청단계), 진행중, 진행완료(상담완료 또는 구매완료), 진행중지
+
+
+
+질문테이블: Qna
+	  id
+      member                 // 상담 대상 멤버	
+      InquiryDate            // 문의날짜
+      InquiryTime            // 문의시간
+
+
+
+고객센터: Faq
+      id;
+      questionTitle;
+      questionContent;
+      answerContent;  
+      category;         // FAQ 카테고리 (예: 결제, 배송, 차량문의 등) 
+      createdBy;        // FAQ 작성자 / 관리자
+      createdAt;        // FAQ 등록일
+      updatedAt;        // FAQ 갱신일
+      isPublic;         // 공개여부
+
+1. 각자 gitHub에 배포한 소스 로컬에 깔기
+
+
+
+
+              "모델": "싼타페 더스타일",
+                "모델_하위": "디젤 e-VGT R2.0 2WD MLX Luxury",
+                "엔진코드": "D4HA",
+                "생산년도": "2005~2012",
+                "모델연식": "2010",
+                "옵션": "2.0 디젤",
+                "유형": "SUV",
+                "등급": "중형SUV",
+                "구동": "FF",
+                "미션": "A/T",
+                "연료": "디젤",
+                "배기량": 1995,
+                "베터리": "90L",
+                "좌석": 7,
+                "연비": "15",
+                "연료탱크": "70",
+                "운전석와이퍼크기": "600",
+                "조수석와이퍼크기": "450",
+                "엔진오일용량": "6.7",
+                "배터리모델명": "Delkor 90L",
+                "엔진오일점도": "5W-30",
+                "엔진오일등급": "ACEA C2/C3",
+                "와이퍼암타입": "U HOOK",
+                "와이퍼연결커넥터": "P1-2",
+                "차량타이어정보": [
+                    {
+                        "앞타이어": "235/60R18",
+                        "뒷타이어": "235/60R18"
+                    },
+                    {
+                        "앞타이어": "235/65R17",
+                        "뒷타이어": "235/65R17"
+                    }
+                ]

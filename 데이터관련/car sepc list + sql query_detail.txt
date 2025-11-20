@@ -1,0 +1,68 @@
+엔진, 연료, 변속기, 최고출력, 최대토크, 배기량, 구동방식, 연료탱크, 배터리 종류, 배터리 충전 용량, 1회 충전 주행거리, 충전시간 (급속), 충전시간 (완속),공차 중량
+
+
+sql 문
+
+-- 기존 테이블 있으면 삭제
+DROP TABLE IF EXISTS hyundai_2025_models;
+
+-- 테이블 생성
+CREATE TABLE hyundai_2025_models (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    category VARCHAR(30) NOT NULL,
+    model VARCHAR(50) NOT NULL,
+    trim_year YEAR DEFAULT 2025,
+    engine VARCHAR(100),
+    fuel ENUM('가솔린','디젤','LPG','하이브리드','전기','수소') NOT NULL,
+    transmission VARCHAR(50),
+    max_power VARCHAR(30),
+    max_torque VARCHAR(30),
+    displacement DECIMAL(4,2),           -- L
+    drive_type ENUM('FWD','AWD','RWD'),
+    fuel_tank DECIMAL(5,1),              -- L (최대 999.9L)
+    battery_type VARCHAR(50),
+    battery_capacity DECIMAL(6,2),       -- kWh
+    ev_range INT,                        -- km
+    fast_charge VARCHAR(30),
+    slow_charge VARCHAR(30),
+    curb_weight INT,                     -- kg
+    note VARCHAR(200)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- 데이터 삽입 (오류 완전 수정본)
+INSERT INTO hyundai_2025_models 
+(category, model, engine, fuel, transmission, max_power, max_torque, displacement, drive_type, fuel_tank, battery_type, battery_capacity, ev_range, fast_charge, slow_charge, curb_weight, note) VALUES
+
+('경차',      '캐스퍼',              '1.0L 터보',           '가솔린',   'CVT',        '100 hp',  '17.5 kgf·m', 1.00, 'FWD', 35.0, NULL,       NULL,    NULL, NULL,     NULL,     1080, NULL),
+('경차',      '캐스퍼 일렉트릭',      '전기모터 91hp',       '전기',     '싱글스피드', '91 hp',   NULL,         NULL, 'FWD', NULL,  '리튬이온', 49.00,  315, '30분',   '7시간',  1300, 'Long Range'),
+
+('소형SUV',   '코나 가솔린',          '1.6L 터보',           '가솔린',   '7단 DCT',    '198 hp',  '27.0 kgf·m', 1.60, 'FWD', 47.0, NULL,       NULL,    NULL, NULL,     NULL,     1480, NULL),
+('소형SUV',   '코나 하이브리드',      '1.6L + 모터',         '하이브리드','6단 DCT',    '141 hp',  '27.0 kgf·m', 1.60, 'FWD', 43.0, '리튬이온', 1.56,   NULL, NULL,     NULL,     1520, NULL),
+('소형SUV',   '코나 일렉트릭',        '전기모터 201hp',      '전기',     '싱글스피드', '201 hp',  NULL,         NULL, 'FWD', NULL,  '리튬이온', 65.40,  490, '41분',   '9시간',  1680, 'Long Range'),
+
+('준중형세단','아반떼',              '1.6L 가솔린',         '가솔린',   'IVT',        '123 hp',  '15.7 kgf·m', 1.60, 'FWD', 47.0, NULL,       NULL,    NULL, NULL,     NULL,     1280, NULL),
+('준중형세단','아반떼 하이브리드',    '1.6L + 모터',         '하이브리드','6단 DCT',    '141 hp',  '27.0 kgf·m', 1.60, 'FWD', 43.0, '리튬이온', 1.32,   NULL, NULL,     NULL,     1380, NULL),
+
+('중형세단',  '쏘나타 디 엣지',       '2.5L 가솔린',         '가솔린',   '8단 자동',   '194 hp',  '25.0 kgf·m', 2.50, 'FWD', 60.0, NULL,       NULL,    NULL, NULL,     NULL,     1520, NULL),
+('중형세단',  '쏘나타 하이브리드',    '2.0L + 모터',         '하이브리드','6단 자동',   '192 hp',  '19.2 kgf·m', 2.00, 'FWD', 50.0, '리튬이온', 1.62,   NULL, NULL,     NULL,     1580, NULL),
+
+('대형세단',  '그랜저',               '3.5L V6',             '가솔린',   '8단 자동',   '300 hp',  '36.2 kgf·m', 3.50, 'FWD', 70.0, NULL,       NULL,    NULL, NULL,     NULL,     1780, 'Calligraphy'),
+('대형세단',  '그랜저 하이브리드',    '1.6L 터보 + 모터',    '하이브리드','6단 자동',   '230 hp',  '35.7 kgf·m', 1.60, 'FWD', 60.0, '리튬이온', 1.49,   NULL, NULL,     NULL,     1720, NULL),
+
+('중형SUV',   '투싼',                '2.5L 가솔린',         '가솔린',   '8단 자동',   '191 hp',  '25.0 kgf·m', 2.50, 'FWD', 54.0, NULL,       NULL,    NULL, NULL,     NULL,     1650, NULL),
+('중형SUV',   '투싼 하이브리드',     '1.6L 터보 + 모터',    '하이브리드','6단 자동',   '230 hp',  '35.7 kgf·m', 1.60, 'AWD', 52.0, '리튬이온', 1.49,   NULL, NULL,     NULL,     1780, NULL),
+
+('중형SUV',   '싼타페',              '2.5L 터보',           '가솔린',   '8단 자동',   '281 hp',  '42.5 kgf·m', 2.50, 'AWD', 67.0, NULL,       NULL,    NULL, NULL,     NULL,     1950, NULL),
+('대형SUV',   '팰리세이드',           '3.8L V6',             '가솔린',   '8단 자동',   '295 hp',  '36.2 kgf·m', 3.80, 'AWD', 71.0, NULL,       NULL,    NULL, NULL,     NULL,     1980, '2025 페이스리프트'),
+
+('EV',        '아이오닉 5',           '듀얼 모터',           '전기',     '싱글스피드', '325 hp',  NULL,         NULL, 'AWD', NULL,  '리튬이온', 84.00,  501, '18분',   '7시간',  2100, '84kWh AWD'),
+('EV',        '아이오닉 6',           '듀얼 모터',           '전기',     '싱글스피드', '320 hp',  NULL,         NULL, 'AWD', NULL,  '리튬이온', 84.00,  614, '18분',   '7시간',  1980, '2025 개선형'),
+('EV',        '아이오닉 9',           '듀얼 모터',           '전기',     '싱글스피드', '405 hp',  NULL,         NULL, 'AWD', NULL,  '리튬이온',110.30, 542, '20분',   '11시간', 2580, '3열 플래그십'),
+
+('수소',      '넥쏘 2025',           '연료전지 95kW',       '수소',     '싱글스피드', '204 hp',  '40.3 kgf·m',NULL, 'FWD', 156.6, NULL,       NULL,   670, '5분',    NULL,     1970, '수소탱크 용량 L'),
+
+('MPV',       '스타리아',            '2.2L 디젤',           '디젤',     '8단 자동',   '177 hp',  '43.0 kgf·m', 2.20, 'FWD', 75.0, NULL,       NULL,    NULL, NULL,     NULL,     2150, '9인승 기준');
+
+-- 확인 쿼리
+SELECT COUNT(*) AS 총_모델_수 FROM hyundai_2025_models;  -- 20개 나와야 정상
+SELECT * FROM hyundai_2025_models ORDER BY category, model;
